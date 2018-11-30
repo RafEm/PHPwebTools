@@ -17,6 +17,13 @@ date_default_timezone_set($serverTz);
 $ignoreIP = "";
 $ignoreHostname = "";
 
+#set log file names:
+
+$fullLog=".html";
+$log=".html";
+$botLog=".html";
+$googleSearchLog".html";
+
 $pv1=getenv("HTTP_HOST");
 $pv2=getenv("REQUEST_URI");
 
@@ -55,8 +62,8 @@ $plat="desktop";
 
 $fhit="<nobr><span style=\"font-size:13px;font-family:verdana \">$when -- $who -- <strong>$pageVisited</strong>  -- $soft -- <strong>$ref</strong></span></nobr><br />";
 
-$hits_file = fopen("$dirRoot/hits.html", "a");
-file_put_contents("$dirRoot/fhits.html",$fhit,FILE_APPEND);
+$hits_file = fopen("$dirRoot/$log", "a");
+file_put_contents("$dirRoot/$fullLog",$fhit,FILE_APPEND);
 
 
 if(preg_match("/W3C_Validator/i","$soft")){
@@ -80,7 +87,7 @@ $isbot="true";
 
 if($isbot){
 $hit="<nobr><span style=\"font-size:14px;font-family:verdana \">$when -- $who -- <strong>$pageVisited</strong> -- <strong>$plat</strong></span></nobr><br />";
-file_put_contents("$dirRoot/bhits.html",$hit,FILE_APPEND);
+file_put_contents("$dirRoot/$botsLog",$hit,FILE_APPEND);
 }
 
 
@@ -172,7 +179,7 @@ fclose($hits_file);
 }
 
 if(preg_match("/.google./","$ref")){
-file_put_contents("$dirRoot/ghits.html","$hit",FILE_APPEND);
+file_put_contents("$dirRoot/$googleSearchLog","$hit",FILE_APPEND);
 }
 }
 }
